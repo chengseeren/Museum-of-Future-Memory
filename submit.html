@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Responsive setting -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Submit Future Memory</title>
+
+  <!-- Submit page CSS -->
+  <link rel="stylesheet" href="css/style.submit.css">
+</head>
+
+<body>
+
+  <!-- Submit page container -->
+  <main class="submit-page">
+
+    <!-- Background image -->
+    <div class="submit-bg"></div>
+
+    <div class="main-overlay"></div>
+
+    <!-- Top navigation -->
+    <header class="submit-header">
+
+      <!-- System mark -->
+      <div class="site-mark">
+        MFM // MEMORY SUBMISSION SYSTEM
+      </div>
+
+      <!-- Return button -->
+      <a href="main.html" class="back-button">
+        Return to Archive
+      </a>
+
+    </header>
+
+    <!-- Main submit layout -->
+    <section class="submit-layout">
+
+      <!-- Left side : contribution categories -->
+      <aside class="submit-sidebar">
+
+        <!-- Section title -->
+        <p class="section-label">
+          Traces You Can Contribute
+        </p>
+
+        <ul class="contribute-list">
+
+        <li
+         class="active"
+         data-type="Object Photographs"
+         data-icon="icons/photograph_icon.svg"
+        >
+            <img
+             src="icons/photograph_icon.svg"
+             alt="Photograph Icon"
+            >
+            <span>Object Photographs</span>
+        </li>
+
+        <li
+        data-type="Future Imaginations"
+        data-icon="icons/image_icon.svg"
+        >
+            <img
+             src="icons/image_icon.svg"
+             alt="Future Imagination Icon"
+            >
+            <span>Future Imaginations</span>
+        </li>
+
+        <li
+        data-type="Messages for the World"
+        data-icon="icons/massage_icon.svg"
+        >
+            <img
+             src="icons/massage_icon.svg"
+             alt="Message Icon"
+            >
+            <span>Messages for the World</span>
+        </li>
+
+        <li
+           data-type="Short Video Memories"
+           data-icon="icons/video_icon.svg"
+        >
+             <img
+               src="icons/video_icon.svg"
+               alt="Video Icon"
+             >
+            <span>Short Video Memories</span>
+        </li>
+
+        <li
+           data-type="Personal Wishes"
+           data-icon="icons/wish_icon.svg"
+        >    
+            <img
+              src="icons/wish_icon.svg"
+              alt="Wish Icon"
+            >
+            <span>Personal Wishes</span>
+          </li>
+
+       </ul>
+      </aside>
+
+      <!-- Right side : submission area -->
+      <section class="submit-content">
+
+        <!-- Top label -->
+        <p class="submit-label">
+          Submission Interface
+        </p>
+
+        <!-- Empty placeholder area -->
+        <!-- Submission form area -->
+<div class="submission-form">
+
+  <!-- Left side: category + text input -->
+  <div class="form-left">
+
+    <!-- Selected category display -->
+    <div class="selected-category">
+      <p class="submit-label">Selected Trace Type</p>
+
+      <div class="selected-type" id="selectedType">
+        <img 
+         id="selectedIcon"
+         src="icons/photograph_icon.svg"
+          alt="Selected Icon"
+        >
+        <span id="selectedText">Object Photographs</span>
+      </div>
+    </div>
+
+    <!-- Text input area -->
+    <div class="text-input-area">
+      <label for="futureText">Your Future Memory</label>
+
+      <textarea
+        id="futureText"
+        placeholder="Write a memory, wish, image description, or imagined future you want to leave behind..."
+      ></textarea>
+    </div>
+
+  </div>
+
+  <!-- Right side: image / video upload area -->
+  <div class="form-right">
+
+    <p class="submit-label">Upload Image / Video</p>
+
+    <label class="upload-box" for="memoryUpload">
+      <input
+        type="file"
+        id="memoryUpload"
+        accept="image/*,video/*"
+      >
+
+      <div class="upload-content">
+        <span class="upload-plus">+</span>
+        <p>Upload a photograph, speculative image, or short video fragment.</p>
+      </div>
+    </label>
+
+    <!-- Confirm upload button -->
+    <button class="submit-button">
+      Confirm Upload
+    </button>
+
+  </div>
+
+</div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <script>
+
+  /* 左侧类别列表 */
+  const contributeItems =
+    document.querySelectorAll(".contribute-list li");
+
+  /* 右侧显示区域 */
+  const selectedText =
+    document.getElementById("selectedText");
+
+  const selectedIcon =
+    document.getElementById("selectedIcon");
+
+  /* 点击切换 */
+  contributeItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+      /* 移除之前 active */
+      contributeItems.forEach(i => {
+        i.classList.remove("active");
+      });
+
+      /* 当前项 active */
+      item.classList.add("active");
+
+      /* 获取数据 */
+      const newType =
+        item.dataset.type;
+
+      const newIcon =
+        item.dataset.icon;
+
+      /* 更新右侧 */
+      selectedText.textContent =
+        newType;
+
+      selectedIcon.src =
+        newIcon;
+    });
+
+  });
+
+</script>
+
+</body>
+</html>

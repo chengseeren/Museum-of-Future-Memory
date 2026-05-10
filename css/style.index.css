@@ -1,0 +1,217 @@
+/* 全局初始化：去除默认边距，并让尺寸计算更稳定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 页面基础设置 */
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: #050807;
+  color: #e9eee9;
+}
+
+/* 首页主容器 */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #050807;
+}
+
+/* 背景图：模糊处理 */
+.bg-image {
+  position: absolute;
+  inset: -24px;
+  z-index: 0;
+  background-image: url("../images/future-archive-room.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  transform: scale(1.06);
+  opacity: 0.85;
+}
+
+/* 暗色遮罩：增强文字可读性，同时制造未来档案室氛围 */
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, rgba(100, 255, 200, 0.12), transparent 38%),
+    linear-gradient(to bottom, rgba(3, 7, 6, 0.2), rgba(2, 4, 3, 0.55));
+  pointer-events: none;
+}
+
+/* 粒子旋转背景：canvas 层 */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* 中央档案系统面板 */
+.archive-panel {
+  position: relative;
+  z-index: 3;
+  width: min(760px, 88%);
+  padding: 48px 56px;
+
+  /* 边框与圆角 */
+  border: 1px solid rgba(180, 255, 220, 0.22);
+  border-radius: 28px;
+
+  /* 半透明玻璃质感 */
+  background: rgba(5, 12, 10, 0.5);
+  backdrop-filter: blur(18px);
+
+  /* 外发光与内阴影 */
+  box-shadow:
+    0 0 80px rgba(90, 255, 190, 0.13),
+    inset 0 0 40px rgba(159, 255, 208, 0.03);
+
+  text-align: center;
+}
+
+/* 顶部状态文字 */
+.status {
+  font-size: 12px;
+  letter-spacing: 0.28em;
+  color: #9fffd0;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+/* 主标题 */
+h1 {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* 副标题文字 */
+.subtitle {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(235, 245, 238, 0.72);
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+
+/* 加载条容器 */
+.loading {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.14);
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+/* 加载条动态发光部分 */
+.loading span {
+  display: block;
+  height: 100%;
+  width: 45%;
+  background: #9fffd0;
+  box-shadow: 0 0 18px #9fffd0;
+  animation: loading 2.8s ease-in-out infinite;
+}
+
+/* 加载条动画 */
+@keyframes loading {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+/* 进入按钮 */
+.enter {
+  margin-top: 24px;
+  padding: 14px 34px;
+
+  /* 按钮边框与圆角 */
+  border: 1px solid rgba(159, 255, 208, 0.55);
+  border-radius: 999px;
+
+  background: transparent;
+  color: #e9eee9;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* 按钮悬停效果 */
+.enter:hover {
+  background: rgba(159, 255, 208, 0.12);
+  box-shadow: 0 0 24px rgba(159, 255, 208, 0.25);
+}
+
+/* 左下角系统编号 */
+.archive-code {
+  position: absolute;
+  z-index: 3;
+  bottom: 28px;
+  left: 32px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(220, 245, 235, 0.48);
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  .archive-panel {
+    padding: 36px 28px;
+    border-radius: 22px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .archive-code {
+    left: 20px;
+    bottom: 20px;
+    font-size: 9px;
+  }
+}
+
+.transition-video-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #050807;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.transition-video-wrap.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.transition-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

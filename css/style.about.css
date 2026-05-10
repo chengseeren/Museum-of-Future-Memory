@@ -1,0 +1,431 @@
+/* =========================
+   Global Reset
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Basic Page
+========================= */
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  background: #050807;
+  color: #e9eee9;
+}
+
+/* =========================
+   Main Page
+========================= */
+
+.about-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* =========================
+   Background Image
+========================= */
+
+.about-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background-image: url("../images/about_background.png");
+  background-size: cover;
+  background-position: center;
+
+  transform: scale(1.02);
+
+  opacity: 0.92;
+}
+
+/* =========================
+   Dark Overlay
+========================= */
+
+.about-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.72)
+    );
+
+  pointer-events: none;
+}
+
+/* =========================
+   Header
+========================= */
+
+.about-header {
+  position: relative;
+  z-index: 3;
+
+  height: 84px;
+
+  padding: 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Site mark */
+
+.site-mark {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+
+  color: rgba(230, 255, 244, 0.78);
+}
+
+/* =========================
+   Return Button
+========================= */
+
+.back-button {
+  padding: 12px 20px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(159, 255, 208, 0.55);
+
+  text-decoration: none;
+
+  color: #e9eee9;
+
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  background: rgba(5, 12, 10, 0.28);
+
+  backdrop-filter: blur(12px);
+
+  transition: 0.3s ease;
+}
+
+/* Hover */
+
+.back-button:hover {
+  background: rgba(159, 255, 208, 0.12);
+
+  box-shadow:
+    0 0 24px rgba(159, 255, 208, 0.18);
+}
+
+/* =========================
+   Main Layout
+========================= */
+
+.about-layout {
+  position: relative;
+  z-index: 3;
+
+  height: calc(100vh - 144px);
+
+  padding: 40px 42px;
+
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+
+  gap: 34px;
+  align-items: center;
+}
+
+/* =========================
+   Section Label
+========================= */
+
+.section-label {
+  margin-bottom: 24px;
+
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  color: #9fffd0;
+}
+
+/* =========================
+   Left Side
+========================= */
+
+.about-left {
+  padding: 34px;
+
+  border-radius: 30px;
+
+  background: rgba(5, 12, 10, 0.42);
+
+  backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(180, 255, 220, 0.16);
+}
+
+/* Title */
+
+.about-left h1 {
+  margin-bottom: 28px;
+
+  font-size: clamp(25px, 6vw, 45px);
+  font-weight: 500;
+
+  line-height: 0.95;
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+}
+
+/* Intro */
+
+.intro-text {
+  font-size: 15px;
+  line-height: 1.9;
+
+  color: rgba(235, 245, 238, 0.76);
+}
+
+/* Center Content */
+.about-center {
+  padding: 54px;
+  border-radius: 36px;
+  background: rgba(5, 12, 10, 0.38);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(180, 255, 220, 0.16);
+
+  /* 限制中间板块高度，避免文字挤出页面 */
+  max-height: 68vh;
+
+  /* 重要：让内部内容可以滚动 */
+  overflow: hidden;
+}
+
+/* 可滚动文本区域 */
+.text-block {
+  max-height: calc(68vh - 108px);
+  overflow-y: auto;
+  padding-right: 18px;
+}
+
+/* 滚动条整体 */
+.text-block::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 滚动条背景 */
+.text-block::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+
+/* 滚动条滑块 */
+.text-block::-webkit-scrollbar-thumb {
+  background: rgba(159, 255, 208, 0.45);
+  border-radius: 999px;
+}
+
+
+
+/* 鼠标悬停时滑块更亮 */
+.text-block::-webkit-scrollbar-thumb:hover {
+  background: rgba(159, 255, 208, 0.75);
+}
+
+.text-block {
+  max-height: calc(68vh - 108px);
+
+  overflow-y: auto;
+
+  padding-right: 18px;
+
+  /* 文字设置 */
+  font-size: 17px;
+
+  line-height: 2.2;
+
+  color: rgba(240, 245, 242, 0.88);
+}
+
+.text-block p {
+  margin-bottom: 32px;
+}
+
+.text-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================
+   Right Info Panel
+========================= */
+
+.about-right {
+  padding: 30px;
+
+  border-radius: 30px;
+
+  background: rgba(5, 12, 10, 0.42);
+
+  backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(180, 255, 220, 0.16);
+}
+
+/* Info card */
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Each item */
+
+.info-item {
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Label */
+
+.info-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 10px;
+  letter-spacing: 0.18em;
+
+  color: rgba(159, 255, 208, 0.72);
+}
+
+/* Value */
+
+.info-value {
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: rgba(240, 245, 242, 0.82);
+}
+
+/* =========================
+   Footer
+========================= */
+
+.about-footer {
+  position: relative;
+  z-index: 3;
+
+  height: 60px;
+
+  padding: 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 10px;
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color: rgba(220, 245, 235, 0.42);
+}
+
+/* =========================
+   Animation
+========================= */
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.about-header {
+  animation: fadeUp 1s ease forwards;
+}
+
+.about-left {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.about-center {
+  opacity: 0;
+  animation: fadeUp 1.1s ease forwards;
+  animation-delay: 0.45s;
+}
+
+.about-right {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.65s;
+}
+
+.about-footer {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.85s;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 1100px) {
+
+  body {
+    overflow: auto;
+  }
+
+  .about-page {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .about-header,
+  .about-footer {
+    padding: 0 24px;
+  }
+
+  .about-center {
+    padding: 38px 28px;
+  }
+
+  .system-text {
+    font-size: 17px;
+  }
+}

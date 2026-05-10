@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- 适配不同设备屏幕 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Museum of Future Memories</title>
+
+  <!-- 外部 CSS 文件 -->
+  <link rel="stylesheet" href="css/style.index.css">
+</head>
+
+<body>
+  <!-- 首页启动画面 -->
+  <main class="hero">
+    <!-- 模糊背景图 -->
+    <div class="bg-image"></div>
+
+    <!-- 背景暗色遮罩 -->
+    <div class="bg-overlay"></div>
+
+    <!-- 粒子旋转背景 -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- 中央档案系统面板 -->
+    <section class="archive-panel">
+      <div class="status">Archive System Initialising</div>
+
+      <h1>Museum of<br>Future Memories</h1>
+
+      <p class="subtitle">
+        Fragments of imagined futures, preserved before they exist.
+        <br><br>
+        A living archive where visitors leave behind memories, wishes,
+        photographs, and traces of the futures they hope to create together.
+      </p>
+
+      <!-- 加载条 -->
+      <div class="loading">
+        <span></span>
+      </div>
+
+      <!-- 点击后播放过渡视频 -->
+      <button class="enter" id="enterBtn">ENTER THE ARCHIVE</button>
+    </section>
+
+    <!-- 左下角系统编号 -->
+    <div class="archive-code">
+      ARCHIVE ACCESS // YEAR 2058 // MEMORY NODE 001
+    </div>
+  </main>
+
+  <!-- 全屏过渡视频层：默认隐藏，点击按钮后显示 -->
+  <div class="transition-video-wrap" id="transitionWrap">
+    <video id="transitionVideo" muted playsinline preload="auto">
+      <source src="videos/archive-transition.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    /* ===============================
+       粒子旋转背景
+    =============================== */
+
+    const canvas = document.getElementById("particle-canvas");
+    const ctx = canvas.getContext("2d");
+
+    let width, height, particles;
+
+    // 粒子数量，数值越大，画面越密集
+    const particleCount = 1500;
+
+    // 根据窗口大小调整 canvas
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      createParticles();
+    }
+
+    // 创建粒子
+    function createParticles() {
+      particles = [];
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          // 初始角度
+          angle: Math.random() * Math.PI * 2,
+
+          // 粒子分布范围
+          radius: Math.random() * Math.min(width, height) * 1.1,
+
+          // 粒子大小
+          size: Math.random() * 1.8 + 0.3,
+
+          // 粒子旋转速度
+          speed: Math.random() * 0.0015 + 0.0003,
+
+          // 粒子透明度
+          opacity: Math.random() * 0.45 + 0.08,
+
+          // 用于制造不规则呼吸运动
+          wobble: Math.random() * Math.PI * 2,
+
+          // 轨道层级，影响运动范围
+          layer: Math.random() * 2.2 + 0.5
+        });
+      }
+    }
+
+    // 粒子动画
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const time = Date.now() * 0.001;
+
+      // 让粒子发光叠加
+      ctx.globalCompositeOperation = "lighter";
+
+      particles.forEach(p => {
+        p.angle += p.speed;
+
+        // 呼吸式聚合：粒子半径缓慢收缩 / 扩散
+        const gather =
+          Math.sin(time * 0.45 + p.wobble) * 140 +
+          Math.sin(time * 0.18) * 220;
+
+        const currentRadius = p.radius + gather;
+
+        // 旋转椭圆轨道
+        const x =
+          centerX +
+          Math.cos(p.angle + time * 0.08) * currentRadius * p.layer;
+
+        const y =
+          centerY +
+          Math.sin(p.angle + time * 0.08) * currentRadius * p.layer * 0.92;
+
+        // 粒子亮度轻微闪烁
+        const pulse = Math.sin(time * 1.2 + p.wobble) * 0.3 + 0.7;
+
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(159, 255, 208, ${p.opacity * pulse})`;
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.globalCompositeOperation = "source-over";
+
+      requestAnimationFrame(animate);
+    }
+
+    // 窗口大小变化时重新生成粒子
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+    animate();
+
+
+    /* ===============================
+       ENTER 按钮：播放过渡视频后进入 main.html
+    =============================== */
+
+    const enterBtn = document.getElementById("enterBtn");
+    const transitionWrap = document.getElementById("transitionWrap");
+    const transitionVideo = document.getElementById("transitionVideo");
+
+    enterBtn.addEventListener("click", () => {
+      // 显示全屏视频层
+      transitionWrap.classList.add("active");
+
+      // 从头播放视频
+      transitionVideo.currentTime = 0;
+      transitionVideo.playbackRate = 2.5;
+      transitionVideo.play();
+
+      // 视频播放结束后跳转到主页
+      transitionVideo.onended = () => {
+        window.location.href = "main.html";
+      };
+
+      // 保险跳转：防止部分浏览器没有触发 ended
+      setTimeout(() => {
+        window.location.href = "main.html";
+      }, 5200);
+    });
+  </script>
+</body>
+</html>
