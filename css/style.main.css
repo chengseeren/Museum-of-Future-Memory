@@ -393,3 +393,23 @@ body {
 .contribute-list li.active {
   color: #9fffd0;
 }
+
+.main-bg {
+  pointer-events: none;
+}
+
+.archive-center {
+  position: relative;
+  z-index: 10;
+}
+
+.main-actions {
+  position: relative;
+  z-index: 20;
+}
+
+.main-actions a {
+  position: relative;
+  z-index: 30;
+  pointer-events: auto;
+}
